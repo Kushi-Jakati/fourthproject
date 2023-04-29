@@ -1,0 +1,25 @@
+Enter the number of dog objects you would like to generate (must be an integer): 
+10
+
+Would you like to sort by weight or name? Please type 'weight' or 'name': 
+weight
+
+Sorted weights with Selection Sort: [13.94, 20.77, 25.08, 36.94, 46.07, 66.37, 66.39, 78.42, 97.72, 104.09, 110.74]
+Selection Sort Time: 0.6678 milliseconds 
+
+Sorted weights with Quick Sort: [13.94, 20.77, 25.08, 36.94, 46.07, 66.37, 66.39, 78.42, 97.72, 104.09, 110.74]
+Quick Sort Time: 0.1007 milliseconds 
+
+Now, for the Linear and Binary Search Algorithms, would you like to search for a dog with a specific weight or name? Please type 'weight' or 'name':
+name
+
+We will do a linear and binary search through our array for a dog with a name of Heloise in our array.
+
+Linear Search Time of Shuffled Array: 0.0432 milliseconds
+
+Binary Search of Sorted Array: 0.009601 milliseconds
+
+Would you like to see the time differences of a linear search if the array was already sorted? Please type 'yes' or 'no':
+yes
+
+Linear Search: 0.0021 milliseconds

@@ -12,6 +12,11 @@ import java.util.Scanner;
  * Hello world!
  *
  */
+
+// Then, run your program with increasing numbers of objects (10, 100, 1000, 10000, 100000), measuring the sort
+// time. Include in what you submit a document with a table that displays your
+// results and a short discussion about whether the algorithm analysis
+// conclusions from class apply when we are sorting objects.
 public class DogAlgo {
     public static void main(String[] args) throws URISyntaxException, FileNotFoundException {
         ArrayList<Dogs> allDogs = new ArrayList<Dogs>();
@@ -48,7 +53,7 @@ public class DogAlgo {
             numDogs = userScan.nextInt();
         }
 
-        System.out.println("Would you like to sort by weight or name? Please type 'weight' or 'name': ");
+        System.out.println("\nWould you like to sort by weight or name? Please type 'weight' or 'name': ");
         String sortType = userScan.next();
         while (!sortType.contentEquals("weight") && !sortType.contentEquals("name")) {
             System.out.println("Please type 'weight' or 'name': ");
@@ -88,7 +93,7 @@ public class DogAlgo {
             SortingMethods.SelectionSort(dogWeights);
             endTime = System.nanoTime();
             duration = (endTime - startTime);
-            System.out.println("Sorted weights with Selection Sort: " + dogWeights.toString());
+            System.out.println("\nSorted weights with Selection Sort: " + dogWeights.toString());
             System.out.println("Selection Sort Time: " + (duration / 1.e6) + " milliseconds \n");
 
             // shuffle array
@@ -111,7 +116,7 @@ public class DogAlgo {
             SortingMethods.SelectionSortString(names);
             endTime = System.nanoTime();
             duration = (endTime - startTime);
-            System.out.println("Sorted names with Selection Sort: " + names.toString());
+            System.out.println("\nSorted names with Selection Sort: " + names.toString());
             System.out.println("Selection Sort Time: " + (duration / 1.e6) + " milliseconds +\n");
 
             // shuffle array
@@ -142,30 +147,26 @@ public class DogAlgo {
             // Choose a random weight from dogWeights array as our target
             double targetWeight = dogWeights.get(rand.nextInt(dogWeights.size()));
             System.out.println(
-                    "We will do both a linear and binary search through our shuffled array for a dog with a weight of "
+                    "\nWe will do both a linear and binary search through our array for a dog with a weight of "
                             + targetWeight + " pounds in our array");
-            // Sort name array using linear search
-            // Sort the array using the linearSearch algorithm
+            // Search name array using linear search
+            // Search the array using the linearSearch algorithm
             startTime = System.nanoTime();
             SortingMethods.linearSearch(dogWeights, targetWeight);
             endTime = System.nanoTime();
             duration = (endTime - startTime);
-            System.out.println("Sorted weights with Linear Search: " + dogWeights.toString());
-            System.out.println("Linear Search Time: " + (duration / 1.e6) + " milliseconds \n");
-
-            // shuffle array
-            SortingMethods.shuffle(dogWeights);
+            System.out.println("Linear Search Time of Shuffled Array: " + (duration / 1.e6) + " milliseconds \n");
 
             // Sort the array using the binarySearch algorithm
+            SortingMethods.quickSort(dogWeights);
             startTime = System.nanoTime();
             SortingMethods.binarySearch(dogWeights, targetWeight);
             endTime = System.nanoTime();
             duration = (endTime - startTime);
-            System.out.println("Sorted weights with Binary Search: " + dogWeights.toString());
-            System.out.println("Binary Search Time: " + (duration / 1.e6) + " milliseconds \n");
+            System.out.println("Binary Search Time of Sorted Array: " + (duration / 1.e6) + " milliseconds \n");
 
             System.out.println(
-                    "Would you like to see the time differences if the array was already shuffled? Please type 'yes' or 'no': ");
+                    "Would you like to see the time differences of a linear search if the array was already sorted? Please type 'yes' or 'no': ");
             String shuffle = userScan.next();
             while (!shuffle.contentEquals("yes") && !shuffle.contentEquals("no")) {
                 System.out.println("Please type 'yes' or 'no': ");
@@ -179,14 +180,8 @@ public class DogAlgo {
                 SortingMethods.linearSearch(dogWeights, targetWeight);
                 endTime = System.nanoTime();
                 duration = (endTime - startTime);
-                System.out.println("Linear Search Time: " + (duration / 1.e6) + " milliseconds \n");
+                System.out.println("\nLinear Search Time: " + (duration / 1.e6) + " milliseconds \n");
 
-                // Search name array using binary search
-                startTime = System.nanoTime();
-                SortingMethods.binarySearch(dogWeights, targetWeight);
-                endTime = System.nanoTime();
-                duration = (endTime - startTime);
-                System.out.println("Binary Search Time: " + (duration / 1.e6) + " milliseconds \n");
             } else if (shuffle.contentEquals("no")) {
                 System.out.println("Okay, thanks.");
             }
@@ -196,48 +191,45 @@ public class DogAlgo {
             // Choose a random name from names array as our target
             String targetName = names.get(rand.nextInt(names.size()));
             System.out.println(
-                    "We will do both a linear and binary search through our shuffled array for a dog with a name of "
-                            + targetName + " in our array.");
+                    "\nWe will do a linear and binary search through our array for a dog with a name of "
+                            + targetName + " in our array.\n");
+
             // Sort name array using linear search
             startTime = System.nanoTime();
             SortingMethods.linearSearchString(names, "A");
             endTime = System.nanoTime();
             duration = (endTime - startTime);
-            System.out.println("Linear Search Time: " + (duration / 1.e6) + " milliseconds \n");
+            System.out.println("Linear Search Time of Shuffled Array: " + (duration / 1.e6) + " milliseconds\n");
 
-            // Sort name array using binary search
-            startTime = System.nanoTime();
-            SortingMethods.binarySearchString(names, "A");
-            endTime = System.nanoTime();
-            duration = (endTime - startTime);
-            System.out.println("Binary Search Time: " + (duration / 1.e6) + " milliseconds \n");
+            // Sort name array using quickSort algorithm
+            SortingMethods.quickSortString(names); 
+            // Search name array using binary search
+             startTime = System.nanoTime();
+             SortingMethods.binarySearchString(names, targetName);
+             endTime = System.nanoTime();
+             duration = (endTime - startTime);
+             System.out.println("Binary Search of Sorted Array: " + (duration / 1.e6) + " milliseconds \n");
 
             System.out.println(
-                    "Would you like to see the time differences if the array was already shuffled? Please type 'yes' or 'no': ");
+                    "Would you like to see the time differences of a linear search if the array was already sorted? Please type 'yes' or 'no': ");
             String shuffle = userScan.next();
             while (!shuffle.contentEquals("yes") && !shuffle.contentEquals("no")) {
                 System.out.println("Please type 'yes' or 'no': ");
                 shuffle = userScan.next();
             }
-                if (shuffle.contentEquals("yes")) {
-                    // Sort name array using quickSort algorithm
-                    SortingMethods.quickSortString(names);
-                    // Search name array using linear search
-                    startTime = System.nanoTime();
-                    SortingMethods.linearSearchString(names, targetName);
-                    endTime = System.nanoTime();
-                    duration = (endTime - startTime);
-                    System.out.println("Linear Search: " + (duration / 1.e6) + " milliseconds \n");
+            if (shuffle.contentEquals("yes")) {
+                // Sort name array using quickSort algorithm
+                SortingMethods.quickSortString(names);
+                // Search name array using linear search
+                startTime = System.nanoTime();
+                SortingMethods.linearSearchString(names, targetName);
+                endTime = System.nanoTime();
+                duration = (endTime - startTime);
+                System.out.println("\nLinear Search: " + (duration / 1.e6) + " milliseconds");
 
-                    // Search name array using binary search
-                    startTime = System.nanoTime();
-                    SortingMethods.binarySearchString(names, targetName);
-                    endTime = System.nanoTime();
-                    duration = (endTime - startTime);
-                    System.out.println("Binary Search: " + (duration / 1.e6) + " milliseconds \n");
-                } else if (shuffle.contentEquals("no")) {
-                    System.out.println("Okay, thanks.");
-                }
+            } else if (shuffle.contentEquals("no")) {
+                System.out.println("Okay, thanks.");
             }
         }
     }
+}
